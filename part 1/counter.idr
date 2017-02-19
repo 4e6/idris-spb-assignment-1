@@ -1,11 +1,14 @@
 import Functions
 
 {-
-  Write a complete program which prompts for an input, calls 
+  Write a complete program which prompts for an input, calls
   the function `counts` and prints its output.
 -}
 
 
 
 main : IO ()
-main = putStrLn "This is unimplemented words and characters counter"
+main = do
+  putStrLn "Input words"
+  s <- getLine
+  print $ counts s
