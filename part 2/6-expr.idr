@@ -11,6 +11,14 @@ Look at data type Picture (4-pictures.idr) for ideas.
 -}
 
 data Expr : Type where
+  Val : Int -> Expr
+  Add : Expr -> Expr -> Expr
+  Sub : Expr -> Expr -> Expr
+  Mul : Expr -> Expr -> Expr
 
 -- Implement function, which evaluates an integer arithmetic expression.
-evaluate : Expr -> Int 
+evaluate : Expr -> Int
+evaluate (Mul x y) = evaluate x * evaluate y
+evaluate (Add x y) = evaluate x + evaluate y
+evaluate (Sub x y) = evaluate x - evaluate y
+evaluate (Val x)   = x
