@@ -1,6 +1,8 @@
 -- Define function `even` for determining if the given natural number is even
 even : Nat -> Bool
-
+even Z = True
+even (S Z) = False
+even (S (S k)) = even k
 
 -- Should be True
 test1 : Bool
@@ -9,14 +11,16 @@ test1 = even 2 && even (S (S (S (S (S (S (S (S (S (S (S (S Z))))))))))))
 {-
 Define recursive function, which is evaluated according to the following rules:
                |  0,     if a < b
-     a .-. b = | 
+     a .-. b = |
                |  a - b, otherwise
 -}
 
 infixl 10 .-.
 
 (.-.) : Nat -> Nat -> Nat
-n .-. m = ?rhs
+Z     .-. (S _) = Z
+(S n) .-. Z     = (S n)
+(S n) .-. (S m) = n .-. m
 
 -- Should be True
 test2 : Bool
@@ -28,6 +32,7 @@ test2 = (5 .-. 2 == 3) && (2 .-. 5 == 0)
 -}
 
 abs' : Nat -> Nat -> Nat
+abs' k j = k .-. j + j .-. k
 
 
 -- Should be True
@@ -40,6 +45,8 @@ test3 = abs' 2 5 == 3
 -}
 
 plus'' : Nat -> Nat -> Nat
+plus'' k Z = k
+plus'' k (S j) = plus'' (S k) j
 
 
 -- Should be True
